@@ -1,0 +1,8 @@
+com\example\controller\LoginServlet.class
+com\example\controller\EventServlet.class
+com\example\controller\SignupServlet.class
+com\example\dao\DBConnection.class
+com\example\dao\EventDAO.class
+com\example\dao\UserDAO.class
+com\example\model\Event.class
+com\example\model\User.class
