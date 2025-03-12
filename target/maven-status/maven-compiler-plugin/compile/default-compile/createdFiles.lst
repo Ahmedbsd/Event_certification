@@ -1,8 +1,15 @@
-com\example\controller\LoginServlet.class
 com\example\controller\EventServlet.class
-com\example\controller\SignupServlet.class
 com\example\dao\DBConnection.class
+com\example\utils\EmailUtil$1.class
+com\example\controller\VerifyServlet.class
+com\example\controller\EditEventServlet.class
+com\example\model\Participant.class
+com\example\controller\ParticipantServlet.class
+com\example\controller\LoginServlet.class
+com\example\controller\SignupServlet.class
 com\example\dao\EventDAO.class
+com\example\utils\EmailUtil.class
 com\example\dao\UserDAO.class
 com\example\model\Event.class
 com\example\model\User.class
+com\example\dao\ParticipantDAO.class

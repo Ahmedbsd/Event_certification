@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet {
         if (user != null) {
             HttpSession session = request.getSession();
             session.setAttribute("user_id", user.getIdUser());
-            response.sendRedirect("events.jsp");
+            response.sendRedirect(request.getContextPath() + "/EventServlet");
         } else {
             response.sendRedirect("login.jsp?error=1");
         }
