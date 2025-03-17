@@ -25,9 +25,17 @@ public class LoginServlet extends HttpServlet {
         User user = userDAO.loginUser(email, password);
         
         if (user != null) {
+        	String p = "participant";
+        	String ad = "admin";
             HttpSession session = request.getSession();
             session.setAttribute("user_id", user.getIdUser());
-            response.sendRedirect(request.getContextPath() + "/EventServlet");
+            if(user.getType().equals(ad)) {
+            	response.sendRedirect(request.getContextPath() + "/EventServlet");
+            }else if(user.getType().equals(p)) {
+            	response.sendRedirect(request.getContextPath() + "/EventParticipant");
+            }else {
+            	System.out.println(user.getType());
+            }
         } else {
             response.sendRedirect("login.jsp?error=1");
         }

@@ -102,4 +102,55 @@ public class EventDAO {
         }
         return null;
     }
+    public List<Event> getEventByManager(int id_manager) throws SQLException {
+        List<Event> events = new ArrayList<>();
+        String query = "SELECT * FROM events WHERE manager_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+        	PreparedStatement stmt = conn.prepareStatement(query);){
+        	stmt.setInt(1, id_manager);
+        	try (ResultSet rs = stmt.executeQuery()) {
+
+	            while (rs.next()) {
+	                events.add(new Event(
+	                        rs.getInt("id_event"),
+	                        rs.getString("title"),
+	                        rs.getString("description"),
+	                        rs.getString("date"),
+	                        rs.getString("period"),
+	                        rs.getInt("manager_id")
+	                ));
+	            }
+        }
+       }
+        return events;
+    }
+    
+    public List<Event> getEventByParticipant(int id_participant) throws SQLException {
+        List<Event> events = new ArrayList<>();
+        String query = "SELECT e.id_event, e.title, e.description, e.date, e.period, e.manager_id\r\n"
+        		+ "FROM events e\r\n"
+        		+ "JOIN participant p ON e.id_event = p.id_event\r\n"
+        		+ "JOIN user u ON p.cin = u.cin\r\n"
+        		+ "WHERE u.id_user = ?;";
+
+        try (Connection conn = DBConnection.getConnection();
+        	PreparedStatement stmt = conn.prepareStatement(query);){
+        	stmt.setInt(1, id_participant);
+        	try (ResultSet rs = stmt.executeQuery()) {
+
+	            while (rs.next()) {
+	                events.add(new Event(
+	                        rs.getInt("id_event"),
+	                        rs.getString("title"),
+	                        rs.getString("description"),
+	                        rs.getString("date"),
+	                        rs.getString("period"),
+	                        rs.getInt("manager_id")
+	                ));
+	            }
+        }
+       }
+        return events;
+    }
 }

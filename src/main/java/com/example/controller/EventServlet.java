@@ -50,9 +50,10 @@ public class EventServlet extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
         try {
-            List<Event> events = eventDAO.getAllEvents();
+        	HttpSession session = request.getSession();
+            int managerId = (Integer) session.getAttribute("user_id");
+            List<Event> events = eventDAO.getEventByManager(managerId);
             request.setAttribute("events", events);
             RequestDispatcher dispatcher = request.getRequestDispatcher("events.jsp");
             dispatcher.forward(request, response);
@@ -61,6 +62,7 @@ public class EventServlet extends HttpServlet {
         }
     }
 
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         HttpSession session = request.getSession();
